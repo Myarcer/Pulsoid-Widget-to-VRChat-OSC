@@ -1,0 +1,13 @@
+{
+    "name": "pulsoid-widget-osc",
+    "version": "1.0.0",
+    "description": "Pulsoid Widget to VRChat OSC - No token expiration!",
+    "main": "code/app.js",
+    "scripts": {
+        "start": "node code/app.js"
+    },
+    "dependencies": {
+        "node-osc": "^9.0.1",
+        "ws": "^8.14.2"
+    }
+}

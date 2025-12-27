@@ -1,0 +1,18 @@
+{
+  "source": "builtin",
+  "applications": [
+    {
+      "app_key": "marck.pulsoidwidgetosc",
+      "launch_type": "binary",
+      "binary_path_windows": "run.bat",
+      "is_dashboard_overlay": false,
+      "strings": {
+        "en_us": {
+          "name": "Pulsoid Widget to VRChat OSC",
+          "description": "Heart rate monitoring via Pulsoid widget - no token expiration"
+        }
+      },
+      "auto_launch": true
+    }
+  ]
+}

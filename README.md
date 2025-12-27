@@ -1,0 +1,60 @@
+# Pulsoid Widget to VRChat OSC
+
+A lightweight tool that sends your heart rate from Pulsoid to VRChat via OSC, using **widget-based authentication** - no token expiration!
+
+> **Fork of [Sonic853/Pulsoid-to-VRChat-OSC](https://github.com/Sonic853/Pulsoid-to-VRChat-OSC)** with widget-based connection instead of API tokens.
+
+## Why Widget Mode?
+
+The original tool requires a Pulsoid API token that **expires periodically**. This fork uses your Pulsoid **widget URL** instead, which:
+- ✅ Never expires
+- ✅ No reauthentication needed
+- ✅ Works as long as your widget exists
+- ✅ Automatic reconnection with smart error messages
+
+## Quick Start
+
+1. **Get your Widget ID** from [pulsoid.net/ui/widgets](https://pulsoid.net/ui/widgets)
+   - Your widget URL looks like: `https://pulsoid.net/widget/view/004431a2-b446-410f-9f15-b25a77fe2c55`
+   - The widget ID is the UUID part: `004431a2-b446-410f-9f15-b25a77fe2c55`
+
+2. **Edit `widget_id.txt`** and paste your widget ID
+
+3. **Run `run.bat`** to start
+
+## SteamVR Auto-Start
+
+Run `INSTALL_STEAMVR_AUTOSTART.bat` to automatically launch with SteamVR.
+
+To remove: Run `UNINSTALL_STEAMVR_AUTOSTART.bat`
+
+## VRChat Avatar Parameters
+
+The following OSC parameters are sent to `localhost:9000`:
+
+| Parameter | Type | Range | Description |
+|-----------|------|-------|-------------|
+| `HR` | int | 0-255 | Heart rate BPM (primary) |
+| `isHRConnected` | bool | - | Connection status (updates every 5s) |
+| `Heartrate` | float | -1 to 1 | For BPM counter display |
+| `Heartrate2` | float | 0 to 1 | For animations/sounds |
+| `HeartBeatToggle` | bool | - | Toggles with each heartbeat |
+
+## Status Messages
+
+The app provides clear status feedback:
+- `[STATUS]` - Connection and startup info
+- `[HR]` - Heart rate readings
+- `[WARNING]` - No data or disconnection alerts
+- `[ERROR]` - Connection failures with troubleshooting hints
+
+## Requirements
+
+- Node.js 18+ (included in releases)
+- Pulsoid account with a widget
+- VRChat with OSC enabled
+
+## Credits
+
+- Original: [Sonic853/Pulsoid-to-VRChat-OSC](https://github.com/Sonic853/Pulsoid-to-VRChat-OSC)
+- Widget mode implementation by Myarcer
