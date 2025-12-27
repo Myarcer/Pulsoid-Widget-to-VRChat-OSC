@@ -7,6 +7,25 @@ echo   Pulsoid Widget to VRChat OSC
 echo ========================================
 echo.
 
+:: Check for widget_id.txt - create from template if missing
+if not exist "widget_id.txt" (
+    if exist "widget_id.txt.template" (
+        copy "widget_id.txt.template" "widget_id.txt" >nul
+        echo [INFO] Created widget_id.txt from template
+        echo [INFO] Please edit widget_id.txt with your Pulsoid widget ID
+        echo [INFO] Get it from: https://pulsoid.net/ui/widgets
+        echo.
+        notepad "widget_id.txt"
+        pause
+        exit /b 0
+    ) else (
+        echo [ERROR] widget_id.txt not found!
+        echo [INFO] Create widget_id.txt with your Pulsoid widget ID
+        pause
+        exit /b 1
+    )
+)
+
 :: Check for local portable Node first
 if exist "node\node.exe" (
     set "NODE_EXE=node\node.exe"
