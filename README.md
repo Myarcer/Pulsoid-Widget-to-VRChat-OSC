@@ -54,9 +54,11 @@ The app provides clear status feedback:
 
 ## Requirements
 
-- Node.js 18+ (included in releases)
+- **Windows** (uses PowerShell for auto-setup)
 - Pulsoid account with a widget
 - VRChat with OSC enabled
+
+> **Note:** Node.js is automatically downloaded on first run if not installed.
 
 ## Credits
 

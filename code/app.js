@@ -9,7 +9,7 @@ if (stringIsnullOrEmpty(widgetId)) {
     console.log('[ERROR] No widget_id.txt found!')
     console.log('[INFO] Create widget_id.txt with your Pulsoid widget ID')
     console.log('[INFO] Get it from: https://pulsoid.net/ui/widgets')
-    console.log('[INFO] Example: 004431a2-b446-410f-9f15-b25a77fe2c55')
+    console.log('[INFO] Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890')
     process.exit(1)
 }
 

@@ -1,3 +1,5 @@
 node_modules/
+node/
 *.log
 .DS_Store
+widget_id.txt

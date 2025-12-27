@@ -90,7 +90,7 @@ const RunWidget = async (widgetId) => {
     // Validate widget ID format
     if (!isValidWidgetId(widgetId)) {
         console.log('[ERROR] Invalid widget ID format!')
-        console.log('[INFO] Widget ID should be a UUID like: 004431a2-b446-410f-9f15-b25a77fe2c55')
+        console.log('[INFO] Widget ID should be a UUID like: a1b2c3d4-e5f6-7890-abcd-ef1234567890')
         console.log('[INFO] Get your widget ID from: https://pulsoid.net/ui/widgets')
         process.exit(1)
     }
