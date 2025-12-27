@@ -6,7 +6,8 @@ A lightweight tool that sends your heart rate from Pulsoid to VRChat via OSC, us
 
 ## Why Widget Mode?
 
-The original tool requires a Pulsoid API token that **expires periodically**. This fork uses your Pulsoid **widget URL** instead, which:
+The original tool requires a Pulsoid API token which needs a **BRO subscription**. This fork uses your Pulsoid **widget URL** instead, which:
+- ✅ **Free** - No BRO subscription required
 - ✅ Never expires
 - ✅ No reauthentication needed
 - ✅ Works as long as your widget exists
@@ -14,13 +15,16 @@ The original tool requires a Pulsoid API token that **expires periodically**. Th
 
 ## Quick Start
 
-1. **Get your Widget ID** from [pulsoid.net/ui/widgets](https://pulsoid.net/ui/widgets)
-   - Your widget URL looks like: `https://pulsoid.net/widget/view/004431a2-b446-410f-9f15-b25a77fe2c55`
-   - The widget ID is the UUID part: `004431a2-b446-410f-9f15-b25a77fe2c55`
+1. **Set up a heart rate monitor with Pulsoid**
+   - See [Pulsoid Documentation](https://www.blog.pulsoid.net/monitors) for supported devices
 
-2. **Edit `widget_id.txt`** and paste your widget ID
+2. **Get your Widget ID** from [pulsoid.net/ui/widgets](https://pulsoid.net/ui/widgets)
+   - Your widget URL looks like: `https://pulsoid.net/widget/view/a1b2c3d4-e5f6-7890-abcd-ef1234567890`
+   - The widget ID is the UUID part: `a1b2c3d4-e5f6-7890-abcd-ef1234567890`
 
-3. **Run `run.bat`** to start
+3. **Edit `widget_id.txt`** and paste your widget ID
+
+4. **Run `run.bat`** to start
 
 ## SteamVR Auto-Start
 
