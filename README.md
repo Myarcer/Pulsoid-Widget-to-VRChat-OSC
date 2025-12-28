@@ -28,9 +28,12 @@ The original tool requires a Pulsoid API token which needs a **BRO subscription*
 
 ## SteamVR Auto-Start
 
-Run `INSTALL_STEAMVR_AUTOSTART.bat` to automatically launch with SteamVR.
+To register this app with SteamVR for automatic startup:
 
-To remove: Run `UNINSTALL_STEAMVR_AUTOSTART.bat`
+1. **Double-click `pulsoid_widget_osc.vrmanifest`** to register the addon with SteamVR
+2. The app will now automatically launch when SteamVR starts
+
+> **Note:** You can manage auto-start addons in SteamVR Settings → Startup/Shutdown → Manage Add-on Applications
 
 ## VRChat Avatar Parameters
 

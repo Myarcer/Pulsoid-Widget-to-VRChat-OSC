@@ -5,7 +5,7 @@
       "app_key": "marck.pulsoidwidgetosc",
       "launch_type": "binary",
       "binary_path_windows": "run.bat",
-      "is_dashboard_overlay": false,
+      "is_dashboard_overlay": true,
       "strings": {
         "en_us": {
           "name": "Pulsoid Widget to VRChat OSC",
