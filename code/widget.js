@@ -148,10 +148,13 @@ const RunWidget = async (widgetId) => {
     // Send connection status to VRChat
     const sendConnectionHeartbeat = () => {
         try {
+            // Check if we've received data recently (within last 30 seconds)
+            const isReceivingData = lastDataTime !== null && (Date.now() - lastDataTime < 30000)
+
             const client = new Client('localhost', 9000)
             client.send({
                 address: '/avatar/parameters/isHRConnected',
-                args: { type: 'b', value: true }
+                args: { type: 'b', value: isReceivingData }
             })
         } catch (err) {
             // VRChat might not be running, that's okay
