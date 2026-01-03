@@ -131,12 +131,17 @@ const loadOSCConfig = () => {
                 return { valid: false, error: `${prefix}: "value" must be a string` }
             }
 
-            if (param.value !== 'toggle' && param.value !== 'heartRate') {
+            if (param.value !== 'toggle' && param.value !== 'heartRate' && param.value !== 'connectionStatus') {
                 // Check if it's a safe math expression
                 const safePattern = /^heartRate\s*[\+\-\*\/\s\d\.\(\)]+$/
                 if (!safePattern.test(param.value)) {
-                    return { valid: false, error: `${prefix}: Invalid value expression "${param.value}". Use "heartRate", "toggle", or math like "heartRate / 127 - 1"` }
+                    return { valid: false, error: `${prefix}: Invalid value expression "${param.value}". Use "heartRate", "toggle", "connectionStatus", or math like "heartRate / 127 - 1"` }
                 }
+            }
+
+            // connectionStatus can only be used with bool type
+            if (param.value === 'connectionStatus' && param.type !== 'bool') {
+                return { valid: false, error: `${prefix}: "connectionStatus" can only be used with type "bool"` }
             }
         }
 
@@ -208,6 +213,10 @@ const evaluateParameterValue = (param, heartRate, state) => {
 
     if (expression === 'toggle') {
         return state.toggle
+    }
+
+    if (expression === 'connectionStatus') {
+        return state.connectionStatus
     }
 
     if (expression === 'heartRate') {
@@ -374,16 +383,22 @@ const RunWidget = async (widgetId) => {
         return
     }
 
-    // Send connection status to VRChat
+    // Send connection status parameters to VRChat
     const sendConnectionHeartbeat = () => {
         try {
             // Check if we've received data recently (within last 30 seconds)
             const isReceivingData = lastDataTime !== null && (Date.now() - lastDataTime < 30000)
 
             const client = new Client('localhost', 9000)
-            client.send({
-                address: '/avatar/parameters/isHRConnected',
-                args: { type: 'b', value: isReceivingData }
+
+            // Send all connectionStatus parameters
+            oscConfig.parameters.forEach(param => {
+                if (param.value === 'connectionStatus') {
+                    client.send({
+                        address: param.address,
+                        args: { type: 'b', value: isReceivingData }
+                    })
+                }
             })
         } catch (err) {
             // VRChat might not be running, that's okay
@@ -496,30 +511,32 @@ const RunWidget = async (widgetId) => {
             try {
                 const client = new Client('localhost', 9000)
 
-                // Build OSC messages from config
-                const messages = oscConfig.parameters.map(param => {
-                    const state = { toggle: hbToggle }
-                    let value = evaluateParameterValue(param, heartRate, state)
+                // Build OSC messages from config (exclude connectionStatus - sent via heartbeat)
+                const messages = oscConfig.parameters
+                    .filter(param => param.value !== 'connectionStatus') // Don't send connectionStatus on every HR update
+                    .map(param => {
+                        const state = { toggle: hbToggle }
+                        let value = evaluateParameterValue(param, heartRate, state)
 
-                    // Convert type to OSC type code
-                    let oscType
-                    if (param.type === 'int') {
-                        oscType = 'i'
-                        value = Math.round(value)
-                    } else if (param.type === 'float') {
-                        oscType = 'f'
-                        value = parseFloat(value)
-                    } else if (param.type === 'bool') {
-                        oscType = 'b'
-                        value = Boolean(value)
-                    }
+                        // Convert type to OSC type code
+                        let oscType
+                        if (param.type === 'int') {
+                            oscType = 'i'
+                            value = Math.round(value)
+                        } else if (param.type === 'float') {
+                            oscType = 'f'
+                            value = parseFloat(value)
+                        } else if (param.type === 'bool') {
+                            oscType = 'b'
+                            value = Boolean(value)
+                        }
 
-                    return {
-                        address: param.address,
-                        args: { type: oscType, value: value },
-                        isToggle: param.value === 'toggle' // Only advanced mode can be toggle
-                    }
-                })
+                        return {
+                            address: param.address,
+                            args: { type: oscType, value: value },
+                            isToggle: param.value === 'toggle' // Only advanced mode can be toggle
+                        }
+                    })
 
                 // Send all messages
                 messages.forEach(msg => {

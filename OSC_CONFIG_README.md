@@ -81,6 +81,7 @@ Math expression or special keyword.
 **Special keywords:**
 - `heartRate` - Raw BPM value (e.g., 75)
 - `toggle` - Alternates true/false each heartbeat (bool only)
+- `connectionStatus` - True when receiving HR data, false when disconnected (bool only)
 
 **Math expressions:**
 Use basic operators with `heartRate`:
@@ -228,6 +229,17 @@ Delete any parameter object you don't need from the array.
   "address": "/avatar/parameters/MyToggle",
   "type": "bool",
   "value": "toggle"
+}
+```
+
+### Want to know when HR monitor is connected?
+**Use Advanced Mode with connectionStatus:**
+```json
+{
+  "name": "HRConnected",
+  "address": "/avatar/parameters/HRConnected",
+  "type": "bool",
+  "value": "connectionStatus"
 }
 ```
 

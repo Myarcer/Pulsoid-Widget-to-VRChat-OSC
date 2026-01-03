@@ -7,7 +7,7 @@
     "type": "Data type: 'int' (whole numbers), 'float' (decimals), or 'bool' (true/false)",
     "outputRange": "SIMPLE MODE - Array [min, max] to map HR to a range. Example: [0, 100] or [0.0, 1.0]",
     "inputRange": "OPTIONAL - Array [min, max] for your typical HR range. Example: [60, 180]. Default: [0, 255]",
-    "value": "ADVANCED MODE - Use 'heartRate' for raw BPM, 'toggle' for alternating bool, or math like 'heartRate / 127 - 1'"
+    "value": "ADVANCED MODE - Use 'heartRate' for raw BPM, 'toggle' for alternating bool, 'connectionStatus' for connected/disconnected, or math like 'heartRate / 127 - 1'"
   },
 
   "_examples": {
@@ -47,10 +47,24 @@
       "address": "/avatar/parameters/Toggle",
       "type": "bool",
       "value": "toggle"
+    },
+    "Connection status": {
+      "_comment": "Connection status - true when receiving HR data, false when disconnected",
+      "name": "Connected",
+      "address": "/avatar/parameters/HRConnected",
+      "type": "bool",
+      "value": "connectionStatus"
     }
   },
 
   "parameters": [
+    {
+      "_comment": "Connection status - true when receiving HR data, false when disconnected",
+      "name": "isHRConnected",
+      "address": "/avatar/parameters/isHRConnected",
+      "type": "bool",
+      "value": "connectionStatus"
+    },
     {
       "_comment": "Raw BPM as integer (0-255)",
       "name": "HR",
