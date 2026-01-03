@@ -12,6 +12,7 @@
 ### Fixed
 - `isHRConnected` parameter now accurately reflects data reception (not just WebSocket connection)
 - Only sends `true` when actually receiving HR data (30s grace period)
+- Removed personal name from SteamVR manifest `app_key`
 
 ### Changed
 - `isHRConnected` now fully configurable (can rename, disable, or add multiple connection status params)
