@@ -1,0 +1,71 @@
+{
+  "_help": {
+    "_note": "This section is ignored - it's just for reference",
+    "Quick Guide": "See OSC_CONFIG_README.md for full documentation",
+    "Simple Mode": "Use 'outputRange' for easy range mapping",
+    "Advanced Mode": "Use 'value' with math expressions for custom formulas",
+    "Types": "int (whole numbers), float (decimals), bool (true/false)"
+  },
+
+  "_examples": {
+    "_note": "Example configurations (delete this section or keep for reference)",
+    "Simple int range": {
+      "name": "MyParameter",
+      "address": "/avatar/parameters/MyParam",
+      "type": "int",
+      "outputRange": [0, 200]
+    },
+    "Simple float range": {
+      "name": "Normalized",
+      "address": "/avatar/parameters/Normalized",
+      "type": "float",
+      "outputRange": [0.0, 1.0]
+    },
+    "Custom input/output": {
+      "name": "CustomScale",
+      "address": "/avatar/parameters/Custom",
+      "type": "float",
+      "inputRange": [60, 180],
+      "outputRange": [0.0, 1.0]
+    },
+    "Advanced math": {
+      "name": "Advanced",
+      "address": "/avatar/parameters/Advanced",
+      "type": "float",
+      "value": "heartRate / 127 - 1"
+    },
+    "Toggle boolean": {
+      "name": "Toggle",
+      "address": "/avatar/parameters/Toggle",
+      "type": "bool",
+      "value": "toggle"
+    }
+  },
+
+  "parameters": [
+    {
+      "name": "HR",
+      "address": "/avatar/parameters/HR",
+      "type": "int",
+      "outputRange": [0, 255]
+    },
+    {
+      "name": "Heartrate",
+      "address": "/avatar/parameters/Heartrate",
+      "type": "float",
+      "value": "heartRate / 127 - 1"
+    },
+    {
+      "name": "Heartrate2",
+      "address": "/avatar/parameters/Heartrate2",
+      "type": "float",
+      "outputRange": [0.0, 1.0]
+    },
+    {
+      "name": "HeartBeatToggle",
+      "address": "/avatar/parameters/HeartBeatToggle",
+      "type": "bool",
+      "value": "toggle"
+    }
+  ]
+}
