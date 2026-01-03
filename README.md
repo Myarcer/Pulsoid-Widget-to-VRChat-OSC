@@ -37,15 +37,43 @@ To register this app with SteamVR for automatic startup:
 
 ## VRChat Avatar Parameters
 
-The following OSC parameters are sent to `localhost:9000`:
+**Fully configurable** via `osc_parameters.json` - customize addresses, ranges, and formulas.
+
+**Default parameters** sent to `localhost:9000`:
 
 | Parameter | Type | Range | Description |
 |-----------|------|-------|-------------|
+| `isHRConnected` | bool | - | Connection status (true when receiving data) |
 | `HR` | int | 0-255 | Heart rate BPM (primary) |
-| `isHRConnected` | bool | - | Connection status (updates every 5s) |
 | `Heartrate` | float | -1 to 1 | For BPM counter display |
 | `Heartrate2` | float | 0 to 1 | For animations/sounds |
 | `HeartBeatToggle` | bool | - | Toggles with each heartbeat |
+
+### Configuration
+
+Edit `osc_parameters.json` to customize parameters:
+
+**Simple Mode** - Easy range mapping:
+```json
+{
+  "name": "HR",
+  "address": "/avatar/parameters/HR",
+  "type": "int",
+  "outputRange": [0, 200]
+}
+```
+
+**Advanced Mode** - Custom math expressions:
+```json
+{
+  "name": "Custom",
+  "address": "/avatar/parameters/Custom",
+  "type": "float",
+  "value": "heartRate / 127 - 1"
+}
+```
+
+See `OSC_CONFIG_README.md` for full documentation.
 
 ## Status Messages
 
