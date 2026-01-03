@@ -2,44 +2,47 @@
   "_help": {
     "_note": "This section is ignored - it's just for reference",
     "Quick Guide": "See OSC_CONFIG_README.md for full documentation",
-    "Simple Mode": "Use 'outputRange' for easy range mapping",
-    "Advanced Mode": "Use 'value' with math expressions for custom formulas",
-    "Types": "int (whole numbers), float (decimals), bool (true/false)"
+    "name": "Descriptive name for your reference (not sent to VRChat)",
+    "address": "OSC path like /avatar/parameters/YourParam - must be unique",
+    "type": "Data type: 'int' (whole numbers), 'float' (decimals), or 'bool' (true/false)",
+    "outputRange": "SIMPLE MODE - Array [min, max] to map HR to a range. Example: [0, 100] or [0.0, 1.0]",
+    "inputRange": "OPTIONAL - Array [min, max] for your typical HR range. Example: [60, 180]. Default: [0, 255]",
+    "value": "ADVANCED MODE - Use 'heartRate' for raw BPM, 'toggle' for alternating bool, or math like 'heartRate / 127 - 1'"
   },
 
   "_examples": {
     "_note": "Example configurations (delete this section or keep for reference)",
-    "_example1_desc": "Simple int - maps 0-255 BPM to 0-200 range",
     "Simple int range": {
+      "_comment": "Simple int - maps 0-255 BPM to 0-200 range",
       "name": "MyParameter",
       "address": "/avatar/parameters/MyParam",
       "type": "int",
       "outputRange": [0, 200]
     },
-    "_example2_desc": "Simple float - maps 0-255 BPM to 0.0-1.0 (normalized)",
     "Simple float range": {
+      "_comment": "Simple float - maps 0-255 BPM to 0.0-1.0 (normalized)",
       "name": "Normalized",
       "address": "/avatar/parameters/Normalized",
       "type": "float",
       "outputRange": [0.0, 1.0]
     },
-    "_example3_desc": "Custom scaling - maps YOUR typical HR (60-180 BPM) to 0.0-1.0",
     "Custom input/output": {
+      "_comment": "Custom scaling - maps YOUR typical HR (60-180 BPM) to 0.0-1.0",
       "name": "CustomScale",
       "address": "/avatar/parameters/Custom",
       "type": "float",
       "inputRange": [60, 180],
       "outputRange": [0.0, 1.0]
     },
-    "_example4_desc": "Advanced math - divides HR by 127, then subtracts 1 = range of -1.0 to 1.0 (for blend shapes)",
     "Advanced math": {
+      "_comment": "Advanced math - divides HR by 127, then subtracts 1 = range of -1.0 to 1.0 (for blend shapes)",
       "name": "Advanced",
       "address": "/avatar/parameters/Advanced",
       "type": "float",
       "value": "heartRate / 127 - 1"
     },
-    "_example5_desc": "Toggle - alternates true/false each heartbeat (for pulsing effects)",
     "Toggle boolean": {
+      "_comment": "Toggle - alternates true/false each heartbeat (for pulsing effects)",
       "name": "Toggle",
       "address": "/avatar/parameters/Toggle",
       "type": "bool",
