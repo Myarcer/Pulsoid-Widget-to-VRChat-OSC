@@ -9,18 +9,21 @@
 
   "_examples": {
     "_note": "Example configurations (delete this section or keep for reference)",
+    "_example1_desc": "Simple int - maps 0-255 BPM to 0-200 range",
     "Simple int range": {
       "name": "MyParameter",
       "address": "/avatar/parameters/MyParam",
       "type": "int",
       "outputRange": [0, 200]
     },
+    "_example2_desc": "Simple float - maps 0-255 BPM to 0.0-1.0 (normalized)",
     "Simple float range": {
       "name": "Normalized",
       "address": "/avatar/parameters/Normalized",
       "type": "float",
       "outputRange": [0.0, 1.0]
     },
+    "_example3_desc": "Custom scaling - maps YOUR typical HR (60-180 BPM) to 0.0-1.0",
     "Custom input/output": {
       "name": "CustomScale",
       "address": "/avatar/parameters/Custom",
@@ -28,12 +31,14 @@
       "inputRange": [60, 180],
       "outputRange": [0.0, 1.0]
     },
+    "_example4_desc": "Advanced math - divides HR by 127, then subtracts 1 = range of -1.0 to 1.0 (for blend shapes)",
     "Advanced math": {
       "name": "Advanced",
       "address": "/avatar/parameters/Advanced",
       "type": "float",
       "value": "heartRate / 127 - 1"
     },
+    "_example5_desc": "Toggle - alternates true/false each heartbeat (for pulsing effects)",
     "Toggle boolean": {
       "name": "Toggle",
       "address": "/avatar/parameters/Toggle",
@@ -44,24 +49,28 @@
 
   "parameters": [
     {
+      "_comment": "Raw BPM as integer (0-255)",
       "name": "HR",
       "address": "/avatar/parameters/HR",
       "type": "int",
       "outputRange": [0, 255]
     },
     {
+      "_comment": "Normalized to -1.0 to 1.0 range (for VRChat blend shapes). Formula: HR÷127-1",
       "name": "Heartrate",
       "address": "/avatar/parameters/Heartrate",
       "type": "float",
       "value": "heartRate / 127 - 1"
     },
     {
+      "_comment": "Normalized to 0.0-1.0 range (for animations)",
       "name": "Heartrate2",
       "address": "/avatar/parameters/Heartrate2",
       "type": "float",
       "outputRange": [0.0, 1.0]
     },
     {
+      "_comment": "Alternates true/false each heartbeat (for pulsing effects)",
       "name": "HeartBeatToggle",
       "address": "/avatar/parameters/HeartBeatToggle",
       "type": "bool",
