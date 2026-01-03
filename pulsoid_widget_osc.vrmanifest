@@ -2,7 +2,7 @@
   "source": "builtin",
   "applications": [
     {
-      "app_key": "marck.pulsoidwidgetosc",
+      "app_key": "com.github.pulsoidwidgetosc",
       "launch_type": "binary",
       "binary_path_windows": "run.bat",
       "is_dashboard_overlay": true,
