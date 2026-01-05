@@ -325,6 +325,9 @@ const RunWidget = async (widgetId) => {
     const oscConfig = configResult.config
     console.log('[INFO] Loaded %d OSC parameter(s) from config', oscConfig.parameters.length)
 
+    // Create a single persistent OSC client to avoid socket exhaustion (ENOBUFS)
+    const oscClient = new Client('localhost', 9000)
+
     // Validate widget ID format
     if (!isValidWidgetId(widgetId)) {
         console.log('[ERROR] Invalid widget ID format!')
@@ -389,12 +392,10 @@ const RunWidget = async (widgetId) => {
             // Check if we've received data recently (within last 30 seconds)
             const isReceivingData = lastDataTime !== null && (Date.now() - lastDataTime < 30000)
 
-            const client = new Client('localhost', 9000)
-
             // Send all connectionStatus parameters
             oscConfig.parameters.forEach(param => {
                 if (param.value === 'connectionStatus') {
-                    client.send({
+                    oscClient.send({
                         address: param.address,
                         args: { type: 'b', value: isReceivingData }
                     })
@@ -438,8 +439,7 @@ const RunWidget = async (widgetId) => {
         heartbeatInterval = null
         dataCheckInterval = null
         try {
-            const client = new Client('localhost', 9000)
-            client.send({
+            oscClient.send({
                 address: '/avatar/parameters/isHRConnected',
                 args: { type: 'b', value: false }
             })
@@ -509,7 +509,6 @@ const RunWidget = async (widgetId) => {
             console.log('[HR] %d bpm', heartRate)
 
             try {
-                const client = new Client('localhost', 9000)
 
                 // Build OSC messages from config (exclude connectionStatus - sent via heartbeat)
                 const messages = oscConfig.parameters
@@ -540,7 +539,7 @@ const RunWidget = async (widgetId) => {
 
                 // Send all messages
                 messages.forEach(msg => {
-                    client.send({ address: msg.address, args: msg.args })
+                    oscClient.send({ address: msg.address, args: msg.args })
 
                     // Toggle the state after sending if it's a toggle parameter
                     if (msg.isToggle) {

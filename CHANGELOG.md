@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2026-01-05
+
+### Fixed
+- **CRITICAL**: Fixed ENOBUFS crash during long sessions - the app was creating a new UDP socket on every heartbeat/heart rate update without closing them, eventually exhausting Windows network buffers
+- Now uses a single persistent OSC client instance instead of creating new ones
+
 ## [1.1.0] - 2026-01-03
 
 ### Added
